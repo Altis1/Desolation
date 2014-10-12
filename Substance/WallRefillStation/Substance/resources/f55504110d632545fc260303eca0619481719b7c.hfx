@@ -1,0 +1,168 @@
+CParticleEffect	$LOCAL$/Resource
+{
+	OnSpawn = "$LOCAL$/Spawner";
+	CustomAttributes = "$LOCAL$/_GlobalAttributes";
+	Autostart = true;
+}
+CNEdEditorParticle_Data	$LOCAL$/EDITOR
+{
+	Position = float3(-8.5891050e-001, 5.2286160e-001, -4.8574629e+000);
+	EulerOrientation = float3(-8.8550062e+000, -3.3725983e+001, 0.0000000e+000);
+	PostFx_EnableDistortion = false;
+	BackdropPath = "Cache/Meshes/SceneReferenceMesh.pkml";
+	SubEntityTreeFactory = "$LOCAL$/CEntityWithTransformsFactory_4C38EC84";
+	IsLooping = true;
+}
+CActionFactoryParticleSpawnerBase	$LOCAL$/Layer_1
+{
+	SpawnCountMode = TotalParticleCount;
+	SpawnCount = 5.0000000e+000;
+	SpawnCountRelativeRandomDeviation = 2.9126221e-001;
+	Descriptor = "$LOCAL$/CParticleDescriptor_AE135B2A";
+}
+CParticleDescriptor	$LOCAL$/CParticleDescriptor_AE135B2A
+{
+	Renderer = "$LOCAL$/CParticleRenderer_Billboard_9136D2F4";
+	CustomFields = 
+	{
+		"$LOCAL$/CParticleFieldDeclaration_1D05AE5A",
+	};
+	CustomAttributes = "$LOCAL$/_GlobalAttributes";
+	CustomEvents = 
+	{
+		"$LOCAL$/CParticleEventDeclaration_68125252",
+	};
+	Samplers = 
+	{
+		"$LOCAL$/CParticleSamplerShape_AD90FAFD",
+		"$LOCAL$/CParticleSamplerCurve_B6B06A87",
+		"$LOCAL$/CParticleSamplerShape_35CAD441",
+	};
+	SpawnEvaluator = "$LOCAL$/CCompilerSyntaxNodeExpression_5566F5E7";
+	States = 
+	{
+		"$LOCAL$/CParticleState_3AF8190E",
+	};
+}
+CActionFactoryWithChilds	$LOCAL$/Spawner
+{
+	ChildList = 
+	{
+		"$LOCAL$/Layer_1",
+	};
+}
+CParticleRenderer_Billboard	$LOCAL$/CParticleRenderer_Billboard_9136D2F4
+{
+	Diffuse = "Textures/Sprites/big_glow2_white.dds";
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_5566F5E7
+{
+	Expression = "function void     Eval()
+{
+	Life = 0.8;
+	Size = 0.01;
+	Color = float4(0, 0, 1, 1);
+	Position = Spawn.samplePosition() * SpawnSpread;
+	Velocity = float3(0, 0, -20) + Position;
+}
+";
+}
+CParticleState	$LOCAL$/CParticleState_3AF8190E
+{
+	StateName = "State_0";
+	Evolvers = 
+	{
+		"$LOCAL$/CParticleEvolver_Physics_36D6D4BD",
+	};
+}
+CParticleEvolver_Physics	$LOCAL$/CParticleEvolver_Physics_36D6D4BD
+{
+	EditorInfosIsBlockMinimized = 0;
+	WorldInteractionMode = OneWay;
+	DieOnContact = true;
+}
+CEntityWithTransformsFactory	$LOCAL$/CEntityWithTransformsFactory_4C38EC84
+{
+}
+CParticleAttributeList	$LOCAL$/_GlobalAttributes
+{
+	AttributeList = 
+	{
+		"$LOCAL$/CParticleAttributeDeclaration_869A6D7B",
+	};
+}
+CParticleSamplerCurve	$LOCAL$/CParticleSamplerCurve_B6B06A87
+{
+	SamplerName = "Sampler_2";
+	ValueType = Float3;
+	Times = 
+	{
+		0.0000000e+000,
+		1.0000000e+000,
+	};
+	FloatValues = 
+	{
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+	};
+	FloatTangents = 
+	{
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+		0.0000000e+000,
+	};
+	MinLimits = float4(0.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+}
+CParticleFieldDeclaration	$LOCAL$/CParticleFieldDeclaration_1D05AE5A
+{
+	FieldName = "Color";
+	FieldType = float4;
+}
+CShapeDescriptor	$LOCAL$/CShapeDescriptor_BBEA6600
+{
+	ShapeType = SPHERE;
+}
+CParticleSamplerShape	$LOCAL$/CParticleSamplerShape_35CAD441
+{
+	SamplerName = "Vel";
+	Shape = "$LOCAL$/CShapeDescriptor_BBEA6600";
+	SampleDimensionality = Volume;
+}
+CShapeDescriptor	$LOCAL$/CShapeDescriptor_77FC4CAF
+{
+	ShapeType = SPHERE;
+	BoxDimensions = float3(3.2565951e+000, 1.9255997e+000, 4.4080930e+000);
+	Radius = 1.0000000e-001;
+}
+CParticleSamplerShape	$LOCAL$/CParticleSamplerShape_AD90FAFD
+{
+	SamplerName = "Spawn";
+	Shape = "$LOCAL$/CShapeDescriptor_77FC4CAF";
+	SampleDimensionality = Volume;
+}
+CParticleEventDeclaration	$LOCAL$/CParticleEventDeclaration_68125252
+{
+	EventName = "OnCollide";
+	EventAction = "Particles/RcvPaint.pkfx/Spawner";
+}
+CParticleAttributeDeclaration	$LOCAL$/CParticleAttributeDeclaration_869A6D7B
+{
+	AttributeName = "SpawnSpread";
+	DefaultValueF4 = float4(2.0000000e-001, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	HasMin = true;
+	HasMax = true;
+	MaxValueF4 = float4(5.0000000e+000, 0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+}

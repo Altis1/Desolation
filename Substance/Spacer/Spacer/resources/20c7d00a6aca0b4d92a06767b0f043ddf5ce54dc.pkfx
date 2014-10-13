@@ -1,0 +1,96 @@
+CParticleEffect	$LOCAL$/Resource
+{
+	OnSpawn = "$LOCAL$/Spawner";
+	CustomAttributes = "$LOCAL$/_GlobalAttributes";
+	Autostart = true;
+}
+CNEdEditorParticle_Data	$LOCAL$/EDITOR
+{
+	Position = float3(0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	BackdropPath = "Models/CubeRoom_Light.pkml";
+	SubEntityTreeFactory = "$LOCAL$/CEntityWithTransformsFactory_4C38EC84";
+}
+CActionFactoryParticleSpawnerBase	$LOCAL$/Layer_1
+{
+	SpawnCountMode = TotalParticleCount;
+	Descriptor = "$LOCAL$/CParticleDescriptor_AE135B2A";
+}
+CParticleDescriptor	$LOCAL$/CParticleDescriptor_AE135B2A
+{
+	Renderer = "$LOCAL$/CParticleRenderer_Billboard_B79E41A6";
+	CustomAttributes = "$LOCAL$/_GlobalAttributes";
+	CustomEvents = 
+	{
+		"$LOCAL$/CParticleEventDeclaration_68125252",
+	};
+	Samplers = 
+	{
+		"$LOCAL$/CParticleSamplerShape_AD90FAFD",
+	};
+	SpawnEvaluator = "$LOCAL$/CCompilerSyntaxNodeExpression_5566F5E7";
+	States = 
+	{
+		"$LOCAL$/CParticleState_3AF8190E",
+	};
+}
+CActionFactoryWithChilds	$LOCAL$/Spawner
+{
+	ChildList = 
+	{
+		"$LOCAL$/Layer_1",
+	};
+}
+CCompilerSyntaxNodeExpression	$LOCAL$/CCompilerSyntaxNodeExpression_5566F5E7
+{
+	EditorInfosIsBlockMinimized = 0;
+	Expression = "function void     Eval()
+
+{
+
+	Life = 1;
+	Size = 0.25;
+	Position = Spawn.samplePosition();	
+	Velocity = float3(0,0,-8);
+
+}
+
+";
+}
+CParticleState	$LOCAL$/CParticleState_3AF8190E
+{
+	StateName = "State_0";
+	Evolvers = 
+	{
+		"$LOCAL$/CParticleEvolver_Physics_36D6D4BD",
+	};
+}
+CParticleEvolver_Physics	$LOCAL$/CParticleEvolver_Physics_36D6D4BD
+{
+	WorldInteractionMode = OneWay;
+	DieOnContact = true;
+}
+CEntityWithTransformsFactory	$LOCAL$/CEntityWithTransformsFactory_4C38EC84
+{
+}
+CParticleAttributeList	$LOCAL$/_GlobalAttributes
+{
+}
+CParticleSamplerShape	$LOCAL$/CParticleSamplerShape_AD90FAFD
+{
+	SamplerName = "Spawn";
+	Shape = "$LOCAL$/CShapeDescriptor_77FC4CAF";
+}
+CShapeDescriptor	$LOCAL$/CShapeDescriptor_77FC4CAF
+{
+	ShapeType = SPHERE;
+	BoxDimensions = float3(0.0000000e+000, 0.0000000e+000, 0.0000000e+000);
+	Radius = 9.9999997e-005;
+}
+CParticleEventDeclaration	$LOCAL$/CParticleEventDeclaration_68125252
+{
+	EventName = "OnCollide";
+}
+CParticleRenderer_Billboard	$LOCAL$/CParticleRenderer_Billboard_B79E41A6
+{
+	BillboardingMaterial = Additive_NoAlpha;
+}
